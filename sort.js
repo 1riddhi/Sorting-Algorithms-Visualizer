@@ -23,7 +23,6 @@ function set_speed() {
   else if (speed == 3) delay = 300;
   else if (speed == 4) delay = 200;
   else delay = 100;
-
 }
 function stop() {
   location.reload();
@@ -63,7 +62,6 @@ function sleep(ms) {
 }
 
 async function bubble_sort() {
-
   let b = []; // copy elements in array-b then sort array-b and keep track of indices
   //at the end array will be changed
   //so to make sure that orginal array-a won't change we keep copy of that
@@ -87,8 +85,6 @@ async function bubble_sort() {
   generate_bars(b);
 }
 async function insertion_sort() {
-
-
   let b = []; // copy elements in array-b then sort array-b and keep track of indices
   for (let i = 0; i < a.length; i++) b[i] = a[i];
 
@@ -112,7 +108,6 @@ async function insertion_sort() {
 }
 
 async function selection_sort() {
-
   let b = []; // copy elements in array-b then sort array-b and keep track of indices
   for (let i = 0; i < a.length; i++) b[i] = a[i];
 
@@ -137,60 +132,64 @@ async function selection_sort() {
   generate_bars(b);
 }
 async function partition(low, high) {
-  let pivot = a[(low + high) / 2];
+  let pivot = a[low]; //pivot = start element
+  let start = low;
+  let end = high;
+  while (start < end) {
+    while (a[start] <= pivot) {
+      start++;
+    }
+    while (a[end] > pivot) {
+      end--;
+    }
+    if (start < end) {
+      [a[start], a[end]] = [a[end], a[start]];
 
-  let i = low - 1;
-  for (let j = low; j < high; j++) {
-    if (a[j] < pivot) {
-      i++;
-
-      [a[i], a[j]] = [a[j], a[i]];
-      hilight_index.push(i);
-      hilight_index.push(j);
+      hilight_index.push(start);
+      hilight_index.push(end);
       generate_bars(a);
       hilight_index = [];
       await sleep(delay);
     }
   }
 
-  // Swap the pivot with the element at index i
-  [a[i + 1], a[high]] = [a[high], a[i + 1]];
-  hilight_index.push(i + 1);
-  hilight_index.push(high);
+  // Swap the pivot with the element at index end
+  [a[low], a[end]] = [a[end], a[low]];
+  hilight_index.push(low);
+  hilight_index.push(end);
   generate_bars(a);
   hilight_index = [];
   await sleep(delay);
 
   // Return the index of the pivot element
-  return i + 1;
+  return end;
 }
 async function start_quick_sort(low, high) {
+  console.log("low = " + low + " high = " + high);
   if (low >= high) {
     return;
   }
-
+  // console.log(a);
   // Partition the array and get the index of the pivot element
   let pivotIndex = await partition(low, high);
 
-  // Recursively sort the two subarrays
   await start_quick_sort(low, pivotIndex - 1);
   await start_quick_sort(pivotIndex + 1, high);
+  console.log("p = " + a[pivotIndex]);
+  console.log(a);
 }
 
 async function quick_sort() {
-
   let b = [];
   for (let i = 0; i < n; i++) b[i] = a[i];
 
   await start_quick_sort(0, n - 1);
-
-  a = b;
   hilight_index = [];
   generate_bars(a);
+  console.log(a);
+  a = b;
 }
-
 function create() {
-  
   a = [];
   con.innerHTML = "";
   n = document.getElementById("length").value;
@@ -240,13 +239,13 @@ function generate_bars(a) {
     values.style.color = "white";
     values.style.marginBottom = a[i] + "5px";
     values.style.textAlign = "center";
-  
+
     values.style.fontSize = "95%";
-    
-    values.style.borderRadius="50%";
+
+    values.style.borderRadius = "50%";
     values.style.borderColor = "red";
-     values.style.backgroundColor="green";
-     values.style.position="relative";
+    values.style.backgroundColor = "green";
+    values.style.position = "relative";
 
     bar.appendChild(values);
 
