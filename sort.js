@@ -34,6 +34,7 @@ async function sorting(idd) {
   document.getElementById("insertion").disabled = true;
   document.getElementById("selection").disabled = true;
   document.getElementById("quick").disabled = true;
+  document.getElementById("submit").disabled = true;
 
   switch (idd) {
     case 1:
@@ -54,6 +55,7 @@ async function sorting(idd) {
   document.getElementById("insertion").disabled = false;
   document.getElementById("selection").disabled = false;
   document.getElementById("quick").disabled = false;
+  document.getElementById("submit").disabled = false;
 }
 
 function sleep(ms) {
@@ -188,6 +190,7 @@ async function quick_sort() {
 }
 
 function create() {
+  
   a = [];
   con.innerHTML = "";
   n = document.getElementById("length").value;
@@ -237,7 +240,16 @@ function generate_bars(a) {
     values.style.color = "white";
     values.style.marginBottom = a[i] + "5px";
     values.style.textAlign = "center";
+  
+    values.style.fontSize = "95%";
+    
+    values.style.borderRadius="50%";
+    values.style.borderColor = "red";
+     values.style.backgroundColor="green";
+     values.style.position="relative";
+
     bar.appendChild(values);
+
     con.appendChild(bar);
   }
 }
