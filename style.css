@@ -1,3 +1,18 @@
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0 0 .5em;
+    line-height: 1.2em;
+    color: #333;
+    text-align: center;
+    text-shadow: 2px 2px 2px #979390;
+}
+
+body {
+    background-color: white;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
 footer {
     font-size: large;
     background-color: #74716f;
@@ -43,10 +58,6 @@ a {
     background-color: white;
 }
 
-body {
-    background-color: white;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-}
 
 .userinput {
     margin: auto;
